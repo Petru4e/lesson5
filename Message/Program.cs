@@ -10,39 +10,102 @@ namespace Message
         //а) Вывести только те слова сообщения, которые содержат не более n букв.
         //б) Удалить из сообщения все слова, которые заканчиваются на заданный символ.
         //в) Найти самое длинное слово сообщения.
-        //г) Сформировать строку с помощью StringBuilder из самых длинных слов сообщения.
-        //Продемонстрируйте работу программы на текстовом файле с вашей программой.
+        //г) Сформировать строку из самых длинных слов сообщения.
+        
         static void Main(string[] args)
         {
             Console.WriteLine("Введите любую фразу: ");
-            string words = Console.ReadLine();
-            
-            Console.WriteLine($"Слова сообщения, которые содержат не более 5 букв: {FiveWords(words)}");
-            Console.WriteLine($"Сообщение без слов, которые заканчиваются на заданный символ(s): {NoWords(words)}");
-            Console.WriteLine($"Cамое длинное слово сообщения");
-            Console.WriteLine($"Строкa из самых длинных слов сообщения: ");
+            string sentence = Console.ReadLine();
+            string[] words = sentence.Split(" ");
+           
+
+            Console.WriteLine($"Слова сообщения, которые содержат не более 5 букв: {FiveChar(words)}");
+            Console.WriteLine($"Сообщение без слов, которые заканчиваются на заданный символ(s): {LastChar(words)}");
+            Console.WriteLine($"Cамое длинное слово сообщения: {BigWord(words)}");
+            Console.WriteLine($"Строкa из самых длинных слов сообщения: {BigWords(words)}");
 
         }
-        static string NoWords(string words)
+
+        /// <summary>
+        /// функция выбирающая слова, содержащие не более 5 букв
+        /// </summary>
+        /// <param name="words"> массив слов</param>
+        /// <returns></returns>
+        private static string FiveChar(string [] words)          
         {
-            Regex minWord = new Regex(@"s$");
-            string minWords = default;
-            foreach (Match match in minWord.Matches(words))
+            string fiveChar="";
+            for (int i = 0; i < words.Length; i++)
+
             {
-                minWords = match.Value;
+                if (words[i].Length <= 5)
+                {
+                    fiveChar = ($"{fiveChar} {words[i]} ");
+                }
+                               
             }
-            return minWords;
+            return fiveChar;
         }
-        static string FiveWords(string words)
+        /// <summary>
+        /// функция, игнорируюшая слова оканчивающиеся на заданный символ "s"
+        /// </summary>
+        /// <param name="words"> массив слов</param>
+        /// <returns></returns>
+        private static string LastChar(string [] words)
         {
-            Regex minWord = new Regex(@".{1,9}");
-            string minWords = default;
-            foreach (Match match in minWord.Matches(words))
+            string lastChar = "";
+            Regex last = new Regex(@"[s]$");
+            for (int i = 0; i < words.Length; i++)
             {
-                minWords = match.Value;
+                if (last.IsMatch(words[i]))
+                {
+                    continue;
+                }
+                else lastChar = ($"{lastChar} {words[i]} ");
             }
-            return minWords;
+            return lastChar;
         }
+        /// <summary>
+        /// функция, выбирающая самое длинное слово
+        /// </summary>
+        /// <param name="words">массив слов</param>
+        /// <returns></returns>
+        private static string BigWord(string[] words)
+        {
+            string bigWord = "";
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (bigWord.Length < words[i].Length)
+                {
+                    bigWord = words[i];
+                }
+
+            }
+            return bigWord;
+        }
+        /// <summary>
+        /// функция, отбирающая самые длинные слова
+        /// </summary>
+        /// <param name="words"> массив слов</param>
+        /// <returns></returns>
+        private static string BigWords(string [] words)
+        {
+            string bigWords = "";
+            int count = 0;
+            for (int i = 0; i < words.Length; i++)
+            {
+                count += words[i].Length;
+            }
+            count = count / words.Length;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length >= count)
+                {
+                    bigWords = ($"{bigWords} {words[i]} ");
+                }
+            }
+            return bigWords;
+        }
+
 
     }
 }
