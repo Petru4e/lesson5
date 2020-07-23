@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Message
 {
@@ -14,8 +15,10 @@ namespace Message
         
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите любую фразу: ");
-            string sentence = Console.ReadLine();
+            Console.Write("Фраза из файла: ");
+            StreamReader sr = new StreamReader("text.txt");
+            string sentence = sr.ReadLine();
+            Console.WriteLine(sentence);
             string[] words = sentence.Split(" ");
            
 

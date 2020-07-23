@@ -53,14 +53,14 @@ namespace Login
             //разобраться почему проходит вариант c повторяющейся буквой например: ghhhhhhhhhkkkkkkkkkkkkk
 
             //Regex LoginValid = new Regex(@"^[a-zA-Z]+[0-9a-zA-Z]{1,9}$");
-            
+
             //string login;
             //do
             //{
             //    Console.WriteLine("Логин должен состоять из букв латинского алфавита \nили цифр(первый символ логина не может быть цифрой). \nДлина логина от 2 до 10 символов. \nВведите логин: ");
             //    login = Console.ReadLine();
-                
-            //} while (LoginValid.IsMatch(login)==false);
+
+            //} while (LoginValid.IsMatch(login) == false);
 
             //Console.WriteLine("Отлично!");
 
